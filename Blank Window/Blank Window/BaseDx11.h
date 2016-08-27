@@ -18,7 +18,7 @@ public:
 	virtual void UnloadContent();					// Unload content in the window
 	virtual void Update(float DeltaTime);			// Update the content of the window each DeltaTime interval
 	virtual void Render();							// Render the window
-	void InitializeSetting(HWND hwnd);				// Initialize the d3d window setting
+	bool InitializeSetting(HWND hwnd);				// Initialize the d3d window setting
 	void CloseWindow();								// Close the window
 
 protected:
