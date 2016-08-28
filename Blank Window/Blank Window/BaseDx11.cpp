@@ -15,11 +15,7 @@ void BaseDx11::UnloadContent() {}
 
 void BaseDx11::Update(float DeltaTime) {}
 
-void BaseDx11::Render() {
-	float quitColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	d3dDeviceContext_->ClearRenderTargetView(backBufferTarget_, quitColor);
-	swapChain_->Present(0, 0);
-}
+void BaseDx11::Render() {}
 
 bool BaseDx11::InitializeSetting(HWND hwnd) {
 

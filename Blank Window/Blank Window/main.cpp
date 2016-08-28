@@ -1,6 +1,6 @@
 ﻿#include<Windows.h>
 #include<memory>
-#include "BaseDx11.h"
+#include "BlankWindowDemo.h"
 
 // Callback function declaration
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -45,7 +45,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	ShowWindow(hwnd, nShowCmd);
 
 	// Create the base dx11 class by using auto ptr
-	std::auto_ptr<BaseDx11> blankDemo(new BaseDx11());
+	std::auto_ptr<BaseDx11> blankDemo(new BlankWindowDemo());
 
 	// Initialize the class
 	bool iniRes = blankDemo->InitializeSetting(hwnd);
