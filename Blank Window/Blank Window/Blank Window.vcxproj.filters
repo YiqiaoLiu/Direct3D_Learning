@@ -24,12 +24,18 @@
     <ClCompile Include="BlankWindowDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DrawTriangleDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseDx11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BlankWindowDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawTriangleDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
