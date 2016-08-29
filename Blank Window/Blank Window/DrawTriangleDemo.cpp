@@ -1,4 +1,11 @@
 #include "DrawTriangleDemo.h"
+#include <xnamath.h>
+
+// The vertex's struct
+struct VertexPostion
+{
+	XMFLOAT3 vertexPos;
+};
 
 DrawTriangleDemo::DrawTriangleDemo() : triangleVertexShader_(nullptr), trianglePixelShader_(nullptr), triangleInputLayout_(nullptr), triangleBuffer_(nullptr) {}
 
