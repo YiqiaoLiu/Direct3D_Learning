@@ -23,7 +23,7 @@ bool DrawTriangleDemo::LoadContent() {
 	HRESULT vsCompileResult;
 	vsCompileResult = D3DX11CompileFromFile("SolidRedColor.fx", 0, 0, "VS_Main", "vs_4_0", shaderFlag, 0, 0, &vsBuffer, &errBuffer, 0);
 
-	// If create failed output the error log and return false
+	// If compile failed output the error log and return false
 	if (FAILED(vsCompileResult)) {
 		if (errBuffer != NULL) {
 			OutputDebugStringA((char*)errBuffer->GetBufferPointer());
@@ -42,6 +42,33 @@ bool DrawTriangleDemo::LoadContent() {
 		vsBuffer->Release();
 		return false;
 	}
+
+	// Second, load the input layer
+	// Create a description of the input layer will be created
+	D3D11_INPUT_ELEMENT_DESC inputLayoutDesc[] = {
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,
+		0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+	};
+	// Create the input layer
+	int totalInputLayout = ARRAYSIZE(inputLayoutDesc);
+	HRESULT ilCreateResult;
+	ilCreateResult = d3dDevice_->CreateInputLayout(inputLayoutDesc, totalInputLayout, vsBuffer->GetBufferPointer(), vsBuffer->GetBufferSize(), &triangleInputLayout_);
+
+	// If create failed, out put the error log and return false
+	if (FAILED(ilCreateResult)) {
+		MessageBox(0, "Failed to create the input layout", 0, MB_OK);
+		return false;
+	}
+
+	//  If create layout success, release the vertex buffer
+	vsBuffer->Release();
+	
+	// Third, load the Pixel Shader
+	// Allocate memory space for Pixel Shader and error buffer
+	// Compile shader from file
+	// If compile failed output the error log and return false
+	// Create the Vertex Shader
+	// If create failed out put the log and return false
 	return true;
 }
 
