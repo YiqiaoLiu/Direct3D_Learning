@@ -6,6 +6,7 @@
 #include <d3d11.h>
 #include <D3DX11.h>
 #include <DxErr.h>
+#include <d3dcompiler.h>
 
 // The base object of the demo
 class BaseDx11
