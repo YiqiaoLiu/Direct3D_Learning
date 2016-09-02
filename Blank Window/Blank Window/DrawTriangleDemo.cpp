@@ -70,7 +70,7 @@ bool DrawTriangleDemo::LoadContent() {
 
 	// Compile shader from file
 	HRESULT psCompileResult;
-	psCompileResult = D3DX11CompileFromFile("SolidRedColor.fx", 0, 0, "VS_Main", "vs_4_0", shaderFlag, 0, 0, &psBuffer, &psErrBuffer, 0);
+	psCompileResult = D3DX11CompileFromFile("SolidRedColor.fx", 0, 0, "PS_Main", "ps_4_0", shaderFlag, 0, 0, &psBuffer, &psErrBuffer, 0);
 
 	// If compile failed output the error log and return false
 	if (FAILED(psCompileResult)) {
