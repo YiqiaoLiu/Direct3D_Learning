@@ -65,10 +65,33 @@ bool DrawTriangleDemo::LoadContent() {
 	
 	// Third, load the Pixel Shader
 	// Allocate memory space for Pixel Shader and error buffer
+	ID3DBlob* psBuffer = nullptr;
+	ID3DBlob* psErrBuffer = nullptr;
+
 	// Compile shader from file
+	HRESULT psCompileResult;
+	psCompileResult = D3DX11CompileFromFile("SolidRedColor.fx", 0, 0, "VS_Main", "vs_4_0", shaderFlag, 0, 0, &psBuffer, &psErrBuffer, 0);
+
 	// If compile failed output the error log and return false
+	if (FAILED(psCompileResult)) {
+		if (psErrBuffer != nullptr) {
+			OutputDebugStringA((char*)psErrBuffer->GetBufferPointer());
+			psErrBuffer->Release();
+		}
+		return false;
+	}
+
 	// Create the Vertex Shader
+	HRESULT psCreateResult;
+	psCreateResult = d3dDevice_->CreatePixelShader(psBuffer->GetBufferPointer(), psBuffer->GetBufferSize(), 0, &trianglePixelShader_);
+
 	// If create failed out put the log and return false
+	if (FAILED(psCreateResult)) {
+		MessageBox(0, "Failed to create Pixel Shader", 0, MB_OK);
+		if (psBuffer != nullptr) psBuffer->Release();
+		return false;
+	}
+	psBuffer->Release();
 	return true;
 }
 
