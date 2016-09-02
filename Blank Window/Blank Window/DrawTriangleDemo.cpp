@@ -152,4 +152,24 @@ void DrawTriangleDemo::UnloadContent() {
 
 void DrawTriangleDemo::Update(float DeltaTime) {}
 
-void DrawTriangleDemo::Render() {}
+void DrawTriangleDemo::Render() {
+	
+	// Check the context
+	if (d3dDeviceContext_ == 0) return;
+
+	// Set the background color and the target render view
+	float backgroundColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	d3dDeviceContext_->ClearRenderTargetView(backBufferTarget_, backgroundColor);
+
+	// Set the input layout, vertex buffer, primitive topology, vertex shader and pixel shader
+	d3dDeviceContext_->IASetInputLayout(triangleInputLayout_);
+	unsigned int stride = sizeof(VertexPostion);
+	unsigned int offset = 0;
+	d3dDeviceContext_->IASetVertexBuffers(0, 1, &triangleBuffer_, &stride, &offset);
+	d3dDeviceContext_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	d3dDeviceContext_->VSSetShader(triangleVertexShader_, nullptr, 0);
+	d3dDeviceContext_->PSSetShader(trianglePixelShader_, nullptr, 0);
+
+	d3dDeviceContext_->Draw(3, 0);
+	swapChain_->Present(0, 0);
+}
