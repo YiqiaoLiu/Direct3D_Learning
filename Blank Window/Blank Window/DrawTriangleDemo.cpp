@@ -1,7 +1,6 @@
 #include "DrawTriangleDemo.h"
 #include <xnamath.h>
 
-
 // The vertex's struct
 struct VertexPostion
 {
@@ -13,7 +12,10 @@ DrawTriangleDemo::DrawTriangleDemo() : triangleVertexShader_(nullptr), triangleP
 DrawTriangleDemo::~DrawTriangleDemo() {}
 
 bool DrawTriangleDemo::LoadContent() {
-	// First, load the Vertex Shader
+	//////////////////////////////////////////////////////////
+	//           First, load the Vertex Shader              //
+	//////////////////////////////////////////////////////////
+
 	// Allocate memory space for vertex shader and error buffer
 	ID3DBlob* vsBuffer = nullptr;
 	ID3DBlob* errBuffer = nullptr;
@@ -43,7 +45,10 @@ bool DrawTriangleDemo::LoadContent() {
 		return false;
 	}
 
-	// Second, load the input layer
+	//////////////////////////////////////////////////////////
+	//           Second, load the input layer               //
+	//////////////////////////////////////////////////////////
+
 	// Create a description of the input layer will be created
 	D3D11_INPUT_ELEMENT_DESC inputLayoutDesc[] = {
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,
@@ -63,7 +68,10 @@ bool DrawTriangleDemo::LoadContent() {
 	//  If create layout success, release the vertex buffer
 	vsBuffer->Release();
 	
-	// Third, load the Pixel Shader
+	//////////////////////////////////////////////////////////
+	//           Third, load the Pixel Shader               //
+	//////////////////////////////////////////////////////////
+
 	// Allocate memory space for Pixel Shader and error buffer
 	ID3DBlob* psBuffer = nullptr;
 	ID3DBlob* psErrBuffer = nullptr;
@@ -92,6 +100,38 @@ bool DrawTriangleDemo::LoadContent() {
 		return false;
 	}
 	psBuffer->Release();
+
+	//////////////////////////////////////////////////////////
+	//              Finally, Load the geometry              //
+	//////////////////////////////////////////////////////////
+
+	// Define the vertices structure
+	VertexPostion vertices[] = {
+		XMFLOAT3(0.5f, 0.5f, 0.5f),
+		XMFLOAT3(0.5f, -0.5f, 0.5f),
+		XMFLOAT3(-0.5f, -0.5f, 0.5f)
+	};
+
+	// Create the buffer description
+	D3D11_BUFFER_DESC vertexBufferDesc;
+	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
+	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertexBufferDesc.ByteWidth = sizeof(VertexPostion) * 3;
+	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+
+	// Create the sub-resource description
+	D3D11_SUBRESOURCE_DATA subResource;
+	ZeroMemory(&subResource, sizeof(subResource));
+	subResource.pSysMem = vertices;
+
+	// Create the vertex buffer
+	HRESULT vertexBufferCreateResult;
+	vertexBufferCreateResult = d3dDevice_->CreateBuffer(&vertexBufferDesc, &subResource, &triangleBuffer_);
+	if (FAILED(vertexBufferCreateResult)) {
+		MessageBox(0, "Failed to create the vertex buffer", 0, MB_OK);
+		return false;
+	}
+
 	return true;
 }
 
