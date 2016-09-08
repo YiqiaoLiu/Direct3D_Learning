@@ -114,11 +114,13 @@
     <ClCompile Include="BlankWindowDemo.cpp" />
     <ClCompile Include="DrawTriangleDemo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseDx11.h" />
     <ClInclude Include="BlankWindowDemo.h" />
     <ClInclude Include="DrawTriangleDemo.h" />
+    <ClInclude Include="Texture2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

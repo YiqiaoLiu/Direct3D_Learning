@@ -15,10 +15,12 @@ public:
 	void Render();											// Render the content in the window
 
 private:
-	ID3D11VertexShader* textureVertextShader_;				// The vertex shader of the texture
-	ID3D11PixelShader* textureVertexShader_;				// The pixel shader of the texture
+	ID3D11VertexShader* textureVertexShader_;				// The vertex shader of the texture
+	ID3D11PixelShader* texturePixelShader_;					// The pixel shader of the texture
 	ID3D11InputLayout* textureInputLayout_;					// The input layout of the texture
 	ID3D11Buffer* textureVertexBuffer_;						// The vertex buffer of the texture
+	ID3D11ShaderResourceView* colorMap_;					// The shader resource view get data by shader
+	ID3D11SamplerState* colorMapSampler_;					// The sampler
 };
 
 #endif // !_TEXTURE_2D_H_
