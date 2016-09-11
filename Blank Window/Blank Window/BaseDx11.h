@@ -9,8 +9,7 @@
 #include <d3dcompiler.h>
 
 // The base object of the demo
-class BaseDx11
-{
+class BaseDx11 {
 public:
 
 	BaseDx11();										// Constructor of class

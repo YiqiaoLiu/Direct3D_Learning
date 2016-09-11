@@ -1,11 +1,11 @@
 #pragma once
 
-#ifndef _TEXTURE_2D_H_
-#define _TEXTURE_2D_H_
+#ifndef __TEXTURE_DEMO_H_
+#define __TEXTURE_DEMO_H_
 
 #include "BaseDx11.h"
-class TextureDemo
-{
+class TextureDemo : public BaseDx11 {
+
 public:
 	TextureDemo();											// The constructor of the class
 	virtual ~TextureDemo();									// The destructor of the class
@@ -23,5 +23,5 @@ private:
 	ID3D11SamplerState* colorMapSampler_;					// The sampler
 };
 
-#endif // !_TEXTURE_2D_H_
+#endif // !_TEXTURE_DEMO_H_
 

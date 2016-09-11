@@ -37,7 +37,7 @@ bool DrawTriangleDemo::LoadContent() {
 	// Create the Vertex Shader
 	HRESULT vsCreateResult;
 	vsCreateResult = d3dDevice_->CreateVertexShader(vsBuffer->GetBufferPointer(), vsBuffer->GetBufferSize(), 0, &triangleVertexShader_);
-
+	
 	// If create failed out put the log and return false
 	if (FAILED(vsCreateResult)) {
 		MessageBox(0, "Failed to create the vertex shader", 0, MB_OK);
@@ -107,8 +107,8 @@ bool DrawTriangleDemo::LoadContent() {
 
 	// Define the vertices structure
 	VertexPostion vertices[] = {
-		XMFLOAT3(0.5f, 0.5f, 0.5f),
-		XMFLOAT3(0.5f, -0.5f, 0.5f),
+		XMFLOAT3(1.0f, 1.0f, 0.5f),
+		XMFLOAT3(-0.5f, -0.5f, 0.5f),
 		XMFLOAT3(-0.5f, -0.5f, 0.5f)
 	};
 

@@ -27,7 +27,7 @@
     <ClCompile Include="DrawTriangleDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
+    <ClCompile Include="TextureDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="DrawTriangleDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2D.h">
+    <ClInclude Include="TextureDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
