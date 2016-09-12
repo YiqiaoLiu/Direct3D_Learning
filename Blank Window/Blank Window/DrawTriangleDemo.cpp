@@ -107,9 +107,9 @@ bool DrawTriangleDemo::LoadContent() {
 
 	// Define the vertices structure
 	VertexPostion vertices[] = {
-		XMFLOAT3(1.0f, 1.0f, 0.5f),
-		XMFLOAT3(-0.5f, -0.5f, 0.5f),
-		XMFLOAT3(-0.5f, -0.5f, 0.5f)
+		XMFLOAT3(0.5f, 0.5f, 0.5f),
+		XMFLOAT3(0.5f, -0.5f, 0.5f),
+		XMFLOAT3(-0.5f, -0.5f, 0.5f), 
 	};
 
 	// Create the buffer description

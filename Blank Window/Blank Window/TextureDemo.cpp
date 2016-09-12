@@ -102,6 +102,41 @@ bool TextureDemo::LoadContent() {
 
 	if (psBuffer) psBuffer->Release();
 
+	//////////////////////////////////////////////////////////
+	//              Finally, Load the geometry              //
+	//////////////////////////////////////////////////////////
+
+	// First, define the vertex
+	VertexInfo vertices[] = {
+		{ XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT2(1.0f, 0.0f) },
+		{ XMFLOAT3(0.5f, -0.5f, 0.5f), XMFLOAT2(1.0f, 1.0f) },
+		{ XMFLOAT3(-0.5f, -0.5f, 0.5f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT2(1.0f, 0.0f) },
+		{ XMFLOAT3(-0.5f, -0.5f, 0.5f), XMFLOAT2(1.0f, 1.0f) },
+		{ XMFLOAT3(-0.5f, 0.5f, 0.5f), XMFLOAT2(0.0f, 0.0f) },
+	};
+
+	// Create the vertex buffer description
+	D3D11_BUFFER_DESC vertextBufferDesc;
+	ZeroMemory(&vertextBufferDesc, sizeof(vertextBufferDesc));
+	vertextBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertextBufferDesc.ByteWidth = sizeof(VertexInfo) * 6;
+	vertextBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+
+	// Create the sub-resource
+	D3D11_SUBRESOURCE_DATA subResource;
+	ZeroMemory(&subResource, sizeof(subResource));
+	subResource.pSysMem = vertices;
+
+	// Create the vertex buffer
+	HRESULT vbCreateResult;
+	vbCreateResult = d3dDevice_->CreateBuffer(&vertextBufferDesc, &subResource, &textureVertexBuffer_);
+	if (FAILED(vbCreateResult)) {
+		MessageBox(0, "Failed to create the vertex buffer", 0, MB_OK);
+		return false;
+	}
+
+	return true;
 
 }
 
