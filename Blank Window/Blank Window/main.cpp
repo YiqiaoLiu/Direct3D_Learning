@@ -2,6 +2,7 @@
 #include<memory>
 #include "BlankWindowDemo.h"
 #include "DrawTriangleDemo.h"
+#include "TextureDemo.h"
 
 // Callback function declaration
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -46,7 +47,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	ShowWindow(hwnd, nShowCmd);
 
 	// Create the base dx11 class by using auto ptr
-	std::auto_ptr<BaseDx11> blankDemo(new DrawTriangleDemo());
+	std::auto_ptr<BaseDx11> blankDemo(new TextureDemo());
 
 	// Initialize the class
 	bool iniRes = blankDemo->InitializeSetting(hwnd);

@@ -136,6 +136,33 @@ bool TextureDemo::LoadContent() {
 		return false;
 	}
 
+	// Create the shader resource view
+	HRESULT srvCreateResult;
+	srvCreateResult = D3DX11CreateShaderResourceViewFromFile(d3dDevice_, "desertsky1.dds", 0, 0, &colorMap_, 0);
+	if (FAILED(srvCreateResult)) {
+		MessageBox(0, "Failed to create the shader resource view!", 0, MB_OK);
+		return false;
+	}
+
+	// Create the sampler description
+	D3D11_SAMPLER_DESC colorMapDesc;
+	ZeroMemory(&colorMapDesc, sizeof(colorMapDesc));
+	colorMapDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	colorMapDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	colorMapDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	colorMapDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	colorMapDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	colorMapDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	// Create the sampler
+	HRESULT samCreateResult;
+	samCreateResult = d3dDevice_->CreateSamplerState(&colorMapDesc, &colorMapSampler_);
+
+	if (FAILED(samCreateResult)) {
+		MessageBox(0, "Failed to create the sampler!", 0, MB_OK);
+		return false;
+	}
+
 	return true;
 
 }
@@ -160,6 +187,28 @@ void TextureDemo::UnloadContent() {
 
 }
 
-void TextureDemo::Render() {}
+void TextureDemo::Render() {
+	
+	// Check the d3dDevice_
+	if (!d3dDevice_) return;
+
+	// Set the background color and set the window
+	float backColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	d3dDeviceContext_->ClearRenderTargetView(backBufferTarget_, backColor);
+
+	// Set the input layout, vertex buffer, primitive topology, vertex shader, pixel shader, color map and sampler
+	d3dDeviceContext_->IASetInputLayout(textureInputLayout_);
+	unsigned int stride = sizeof(VertexInfo);
+	unsigned int offset = 0;
+	d3dDeviceContext_->IASetVertexBuffers(0, 1, &textureVertexBuffer_, &stride, &offset);
+	d3dDeviceContext_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	d3dDeviceContext_->VSSetShader(textureVertexShader_, 0, 0);
+	d3dDeviceContext_->PSSetShader(texturePixelShader_, 0, 0);
+	d3dDeviceContext_->PSSetShaderResources(0, 1, &colorMap_);
+	d3dDeviceContext_->PSSetSamplers(0, 1, &colorMapSampler_);
+
+	d3dDeviceContext_->Draw(6, 0);
+	swapChain_->Present(0, 0);
+}
 
 void TextureDemo::Update(float DeltaTime) {}
